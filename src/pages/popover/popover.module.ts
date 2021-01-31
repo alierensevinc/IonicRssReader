@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { DunyaPage } from './dunya';
+import { PopoverPage } from './popover';
 
 @NgModule({
   declarations: [
-    DunyaPage,
+    PopoverPage,
   ],
   imports: [
-    IonicPageModule.forChild(DunyaPage),
+    IonicPageModule.forChild(PopoverPage),
   ],
 })
-export class DunyaPageModule {}
+export class PopoverPageModule {}

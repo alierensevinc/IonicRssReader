@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {SplashScreen} from '@ionic-native/splash-screen';
 
 
 @IonicPage()
@@ -10,19 +10,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class SplashPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public splashScreen : SplashScreen, public viewCtrl : ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public splashScreen: SplashScreen, public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SplashPage');
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.splashScreen.hide();
- 
+
     setTimeout(() => {
       this.viewCtrl.dismiss();
-    }, 4000);
+    }, 40);
   }
 
 }

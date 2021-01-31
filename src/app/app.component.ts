@@ -1,16 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ModalController } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { GundemPage } from './../pages/gundem/gundem';
-import { SporPage } from '../pages/spor/spor';
-import { TeknolojiPage } from './../pages/teknoloji/teknoloji';
-import { YasamPage } from './../pages/yasam/yasam';
-import { EkonomiPage } from './../pages/ekonomi/ekonomi';
-import { DunyaPage } from './../pages/dunya/dunya';
-import { TurkiyePage } from './../pages/turkiye/turkiye';
-import { SplashPage } from './../pages/splash/splash';
+import {Component, ViewChild} from '@angular/core';
+import {ModalController, Nav, Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {SplashPage} from './../pages/splash/splash';
+import {NewsPage} from "../pages/news/news";
+import {NewsServiceProvider} from "../providers/haber-service/news-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -18,38 +12,30 @@ import { SplashPage } from './../pages/splash/splash';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = GundemPage;
+  rootPage: any = NewsPage;
+  pages: any;
+  pageState: String = 'Gundem';
 
-  pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalController : ModalController) {
+  constructor(public platform: Platform,
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              public modalController: ModalController,
+              public newsService: NewsServiceProvider) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Gündem', component: GundemPage },
-      { title: 'Türkiye', component: TurkiyePage },
-      { title: 'Dünya', component: DunyaPage },
-      { title: 'Ekonomi', component: EkonomiPage },
-      { title: 'Spor', component: SporPage },
-      { title: 'Yaşam', component: YasamPage },
-      { title: 'Teknoloji', component: TeknolojiPage },
-    ];
-
+    this.pages = this.newsService.getNewsCategory();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      
-      let splash = this.modalController.create(SplashPage);
+
+      const splash = this.modalController.create(SplashPage);
       splash.present();
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.newsService.setNewsState(page);
   }
 }

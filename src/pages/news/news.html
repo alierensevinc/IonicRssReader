@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button (click)="presentPopover($event)" icon-only ion-button>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{newsTitle}} Haberleri</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let newItem of newsItems; let i = index">
+      <ion-thumbnail item-start>
+        <img src="{{newItem.thumbnail}}">
+      </ion-thumbnail>
+      <h3>{{newItem.title}}</h3>
+      <button (click)="goNewDetails(i)" clear ion-button item-end>Detaylar</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
